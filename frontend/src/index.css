@@ -1,0 +1,10 @@
+.nav-logo {
+  margin: 10px auto;
+  display: block;
+  width: 45px;
+  object-fit: contain;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1);
+}

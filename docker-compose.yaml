@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  api-server:
+    build:
+      context: ./backend/api_server
+    container_name: api-server
+    restart: on-failure
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/api_server:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  file-upload-server:
+    build:
+      context: ./backend/file_upload_server
+    container_name: file-upload-server
+    restart: on-failure
+    ports:
+      - 8001:8000
+    volumes:
+      - ./backend/file_upload_server:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  upload-event:
+    build:
+      context: ./backend/api_server
+    container_name: upload-event
+    restart: on-failure
+    volumes:
+      - ./backend/api_server:/app
+
+    command: python consumer.py upload
+
+  compress-event:
+    build:
+      context: ./backend/api_server
+    container_name: compress-event
+    restart: on-failure
+    volumes:
+      - ./backend/api_server:/app
+
+    command: python consumer.py compress
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - 3000:80
+    restart: on-failure
+    command: ["nginx", "-g", "daemon off;"]
