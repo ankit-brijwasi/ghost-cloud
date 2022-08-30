@@ -28,7 +28,7 @@ This Project is using the following features of Redis
 
 Here's a short video that explains the project and how it uses Redis:
 
-[![YouTube Video](./assets/images/YouTubeThumbnail.png)](https://youtu.be/CI8He_0s2RI)
+[![YouTube Video](./assets/home-page.png)](https://youtu.be/CI8He_0s2RI)
 
 ## Architecture
 
